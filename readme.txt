@@ -1,0 +1,33 @@
+=== Plugin Name ===
+Contributors: David Goldstein
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3396118
+Tags: facebook
+Requires at least: 2.0
+Tested up to: 2.7.1
+Stable tag: trunk
+
+This plugin adds a footer link to add the current post or page as a Facebook link.
+
+== Description ==
+This plugin adds a footer link to add the current post or page as a Facebook link.  While the plugin is activated a link will appear after the content of each post/page with the text "Share on Facebook", the Facebook icon, both or the familiar Facebook share button. Clicking the link will bring the user to the Facebook site to add the link to their profile.  If the user isn't logged in they will be prompted to do so.
+
+== Installation ==
+1. Add a directory called 'share-on-facebook' (without the quotes) to your '/wp-content/plugins/' directory.
+1. Upload shareonfacebook.php to '/wp-content/plugins/share-on-facebook/' directory.
+1. Activate the plugin through the 'Plugins' page in WordPress.
+1. Go to 'Options->Share on Facebook' in your admin interface to select your options.
+
+== Options ==
+There are two options on the options page: Link Type and Insertion Type.
+
+Link Type - This option sets if you want your Facebook link to be text, icon, both or share button.
+
+Insertion Type - This option sets how you want to insert the link into your posts/pages.  There are two choices: auto or template.
+
+* Auto - When insertion type is set to auto the Facebook link will automatically be inserted right after the post.
+* Template - When insertion type is set to template the Facebook link will appear wherever the template tag for the plugin is added to your theme. This option requires a template tag to be added to your theme.
+
+== Template Tag ==
+When Insertion Type is set to Template the following template tag must be added to your theme in the location you want the link to appear:
+
+'<?php if(function_exists(addtofacebook)) : addtofacebook(); endif; ?>'
