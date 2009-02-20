@@ -2,7 +2,7 @@
 /*
 Plugin Name: Share On Facebook
 Version: 1.0
-Plugin URI: http://nothing.golddave.com/?page_id=108
+Plugin URI: http://nothing.golddave.com/?page_id=680
 Description: Adds a footer link to add the current post or page to as a Facebook link.
 Author: David Goldstein
 Author URI: http://nothing.golddave.com/
