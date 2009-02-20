@@ -85,7 +85,7 @@ function share_on_facebook_options_page() {
 		<form method="post" action="<?php echo $_SERVER['PHP_SELF']."?".$_SERVER['QUERY_STRING']; ?>">
 			<fieldset>
 				<legend>Options:</legend>
-				<input type="hidden" name="action" value="save_options" />
+				<input type="hidden" name="action" value="save_share_on_facebook_options" />
 				<table width="100%" cellspacing="2" cellpadding="5" class="editform">
 					<tr>
 						<th valign="top" scope="row"><label for="link_type">Link Type:</label></th>
@@ -137,7 +137,7 @@ if (!get_option('share_on_facebook_options')){
 	update_option('share_on_facebook_options', $share_on_facebook_options);
 }
 
-if ($_POST['action'] == 'save_options'){
+if ($_POST['action'] == 'save_share_on_facebook_options'){
 	share_on_facebook_save_options();
 }
 ?>
