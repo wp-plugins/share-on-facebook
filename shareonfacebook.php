@@ -18,24 +18,60 @@ Change Log
   * First public release.
 */ 
 
-function share_on_facebook($data){
+function share_on_facebook($data = ''){
 	global $post;
 	$current_options = get_option('share_on_facebook_options');
-	$linktype = $current_options['link_type'];
-	switch ($linktype) {
+	$url = 'http://www.facebook.com/share.php?u=' . rawurlencode(get_permalink($post->ID)) . '&amp;t=' . rawurlencode(get_post($post->ID)->post_title);
+	$basestyle = "font-size:11px; line-height:13px; font-family:'lucida grande',tahoma,verdana,arial,sans-serif; text-decoration:none;";
+	switch ($current_options['link_type']) {
 		case "link":
-			$data=$data."<script>function fbs_click() {u=".get_permalink($post->ID).";t=".get_post($post->ID)->post_title.";window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(u)+'&t='+encodeURIComponent(t),'sharer','toolbar=0,status=0,width=626,height=436');return false;}</script><a href=\"http://www.facebook.com/share.php?u=".get_permalink($post->ID)."\" onclick=\"return fbs_click()\" target=\"_blank\">Share on Facebook</a>";
+			$data .= <<< HTML
+<a href="$url" id="facebook_share_link">Share on Facebook</a>
+HTML;
 			break;
 		case "icon":
-			$data=$data."<script>function fbs_click() {u=".get_permalink($post->ID).";t=".get_post($post->ID)->post_title.";window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(u)+'&t='+encodeURIComponent(t),'sharer','toolbar=0,status=0,width=626,height=436');return false;}</script><a href=\"http://www.facebook.com/share.php?u=".get_permalink($post->ID)." \"onclick=\"return fbs_click()\" target=\"_blank\"><img src=\"http://b.static.ak.fbcdn.net/images/share/facebook_share_icon.gif?8:26981\" alt=\"\" /></a>";
+			$data .= <<< HTML
+<a href="$url" id="facebook_share_icon" style="$basestyle"><img src="http://b.static.ak.fbcdn.net/images/share/facebook_share_icon.gif" alt="Share on Facebook" /></a>
+HTML;
 			break;
 		case "both":
-			$data=$data."<script>function fbs_click() {u=".get_permalink($post->ID).";t=".get_post($post->ID)->post_title.";window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(u)+'&t='+encodeURIComponent(t),'_blank','toolbar=0,status=0,width=626,height=436');return false;}</script><style> html .fb_share_link { padding:2px 0 0 20px; height:16px; background:url(http://b.static.ak.fbcdn.net/images/share/facebook_share_icon.gif?8:26981) no-repeat top left; }</style><a href=\"http://www.facebook.com/share.php?u=".get_permalink($post->ID)." \" onclick=\"return fbs_click()\" target=\"_blank\" class=\"fb_share_link\">Share on Facebook</a>";
+			$data .= <<< HTML
+<a href="$url" id="facebook_share_both" style="$basestyle padding:2px 0 0 20px; height:16px; background:url(http://b.static.ak.fbcdn.net/images/share/facebook_share_icon.gif) no-repeat top left;">Share on Facebook</a>
+HTML;
 			break;
 		case "button":
-			$data=$data."<script>function fbs_click() {u=".get_permalink($post->ID).";t=".get_post($post->ID)->post_title.";window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(u)+'&t='+encodeURIComponent(t),'sharer','toolbar=0,status=0,width=626,height=436');return false;}</script><style> html .fb_share_button { display: -moz-inline-block; display:inline-block; padding:1px 20px 0 5px; height:15px; border:1px solid #d8dfea; background:url(http://b.static.ak.fbcdn.net/images/share/facebook_share_icon.gif?8:26981) no-repeat top right; } html .fb_share_button:hover { color:#fff; border-color:#295582; background:#3b5998 url(http://b.static.ak.fbcdn.net/images/share/facebook_share_icon.gif?8:26981) no-repeat top right; text-decoration:none; } </style> <a href=\"http://www.facebook.com/share.php?u=".get_permalink($post->ID)." \" class=\"fb_share_button\" onclick=\"return fbs_click()\" target=\"_blank\" style=\"text-decoration:none;\">Share</a>";
+			$data .= <<< HTML
+<a href="$url" id="facebook_share_button" style="$basestyle display: -moz-inline-block; display:inline-block; padding:1px 20px 0 5px; margin: 5px 0; height:15px; border:1px solid #d8dfea; color: #3B5998; background: #fff url(http://b.static.ak.fbcdn.net/images/share/facebook_share_icon.gif) no-repeat top right;">Share</a>
+HTML;
 			break;
 		}
+	$data .= <<< HTML
+
+<script type="text/javascript">
+var button = document.getElementById('facebook_share_link') || document.getElementById('facebook_share_icon') || document.getElementById('facebook_share_both') || document.getElementById('facebook_share_button');
+if (button) {
+	button.onclick = function(e) {
+		var url = this.href.replace(/share\.php/, 'sharer.php');
+		window.open(url,'sharer','toolbar=0,status=0,width=626,height=436');
+		return false;
+	}
+
+	if (button.id === 'facebook_share_button') {
+		button.onmouseover = function(){
+			this.style.color='#fff';
+			this.style.borderColor = '#295582';
+			this.style.backgroundColor = '#3b5998';
+		}
+		button.onmouseout = function(){
+			this.style.color = '#3b5998';
+			this.style.borderColor = '#d8dfea';
+			this.style.backgroundColor = '#fff';
+		}
+	}
+}
+</script>
+
+HTML;
 		return $data;
 }
 
@@ -43,7 +79,7 @@ function activate_share_on_facebook(){
 	global $post;
 	$current_options = get_option('share_on_facebook_options');
 	$insertiontype = $current_options['insertion_type'];
-	if ($insertiontype != 'template'){
+	if ($insertiontype !== 'template'){
 		add_filter('the_content', 'share_on_facebook', 10);
 		add_filter('the_excerpt', 'share_on_facebook', 10);
 	}
@@ -55,27 +91,13 @@ function shareonfacebook(){
 	global $post;
 	$current_options = get_option('share_on_facebook_options');
 	$insertiontype = $current_options['insertion_type'];
-	if ($insertiontype != 'auto'){
-		$linktype = $current_options['link_type'];
-		switch ($linktype) {
-			case "link":
-				echo "<script>function fbs_click() {u=".get_permalink($post->ID).";t=".get_post($post->ID)->post_title.";window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(u)+'&t='+encodeURIComponent(t),'sharer','toolbar=0,status=0,width=626,height=436');return false;}</script><a href=\"http://www.facebook.com/share.php?u=".get_permalink($post->ID)."\" onclick=\"return fbs_click()\" target=\"_blank\">Share on Facebook</a>";
-				break;
-			case "icon":
-				echo "<script>function fbs_click() {u=".get_permalink($post->ID).";t=".get_post($post->ID)->post_title.";window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(u)+'&t='+encodeURIComponent(t),'sharer','toolbar=0,status=0,width=626,height=436');return false;}</script><a href=\"http://www.facebook.com/share.php?u=".get_permalink($post->ID)." \"onclick=\"return fbs_click()\" target=\"_blank\"><img src=\"http://b.static.ak.fbcdn.net/images/share/facebook_share_icon.gif?8:26981\" alt=\"\" /></a>";
-				break;
-			case "both":
-				echo "<script>function fbs_click() {u=".get_permalink($post->ID).";t=".get_post($post->ID)->post_title.";window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(u)+'&t='+encodeURIComponent(t),'_blank','toolbar=0,status=0,width=626,height=436');return false;}</script><style> html .fb_share_link { padding:2px 0 0 20px; height:16px; background:url(http://b.static.ak.fbcdn.net/images/share/facebook_share_icon.gif?8:26981) no-repeat top left; }</style><a href=\"http://www.facebook.com/share.php?u=".get_permalink($post->ID)." \" onclick=\"return fbs_click()\" target=\"_blank\" class=\"fb_share_link\">Share on Facebook</a>";
-				break;
-			case "button":
-				echo "<script>function fbs_click() {u=".get_permalink($post->ID).";t=".get_post($post->ID)->post_title.";window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(u)+'&t='+encodeURIComponent(t),'sharer','toolbar=0,status=0,width=626,height=436');return false;}</script><style> html .fb_share_button { display: -moz-inline-block; display:inline-block; padding:1px 20px 0 5px; height:15px; border:1px solid #d8dfea; background:url(http://b.static.ak.fbcdn.net/images/share/facebook_share_icon.gif?8:26981) no-repeat top right; } html .fb_share_button:hover { color:#fff; border-color:#295582; background:#3b5998 url(http://b.static.ak.fbcdn.net/images/share/facebook_share_icon.gif?8:26981) no-repeat top right; text-decoration:none; } </style> <a href=\"http://www.facebook.com/share.php?u=".get_permalink($post->ID)." \" class=\"fb_share_button\" onclick=\"return fbs_click()\" target=\"_blank\" style=\"text-decoration:none;\">Share</a>";
-				break;
-			}
-		}
+	if ($insertiontype !== 'auto'){
+		echo share_on_facebook();
+	}
 }
 
 // Create the options page
-function share_on_facebook_options_page() { 
+function share_on_facebook_options_page() {
 	$current_options = get_option('share_on_facebook_options');
 	$link = $current_options["link_type"];
 	$insert = $current_options["insertion_type"];
@@ -84,7 +106,7 @@ function share_on_facebook_options_page() {
 	<?php } ?>
 	<div class="wrap" id="share-on-facebook-options">
 		<h2>Share on Facebook Options</h2>
-		
+
 		<form method="post" action="<?php echo $_SERVER['PHP_SELF']."?".$_SERVER['QUERY_STRING']; ?>">
 			<fieldset>
 				<legend>Options:</legend>
@@ -93,17 +115,17 @@ function share_on_facebook_options_page() {
 					<tr>
 						<th valign="top" scope="row"><label for="link_type">Link Type:</label></th>
 						<td><select name="link_type">
-						<option value ="link"<?php if ($link == "link") { print " selected"; } ?>>Link Only</option>
-						<option value ="icon"<?php if ($link == "icon") { print " selected"; } ?>>Icon Only</option>
-						<option value ="both"<?php if ($link == "both") { print " selected"; } ?>>Link and Icon</option>
-						<option value ="button"<?php if ($link == "button") { print " selected"; } ?>>Share Button</option>
+						<option value="link" <?php if ($link === "link") echo 'selected="selected"';?>>Link Only</option>
+						<option value="icon" <?php if ($link === "icon") echo 'selected="selected"';?>>Icon Only</option>
+						<option value ="both" <?php if ($link === "both") echo 'selected="selected"';?>>Link and Icon</option>
+						<option value ="button" <?php if ($link === "button") echo 'selected="selected"';?>>Share Button</option>
 						</select></td>
 					</tr>
 					<tr>
 						<th valign="top" scope="row"><label for="insertion_type">Insertion Type:</label></th>
 						<td><select name="insertion_type">
-						<option value ="auto"<?php if ($insert == "auto") { print " selected"; } ?>>Auto</option>
-						<option value ="template"<?php if ($insert == "template") { print " selected"; } ?>>Template</option>
+						<option value ="auto" <?php if ($insert === "auto") echo 'selected="selected"';?>>Auto</option>
+						<option value ="template"<?php if ($insert === "template") echo 'selected="selected"';?>>Template</option>
 						</select></td>
 					</tr>
 				</table>
@@ -113,7 +135,7 @@ function share_on_facebook_options_page() {
 			</p>
 		</form>
 	</div>
-<?php 
+<?php
 }
 
 function share_on_facebook_add_options_page() {
@@ -125,7 +147,7 @@ function share_on_facebook_save_options() {
 	// create array
 	$share_on_facebook_options["link_type"] = $_POST["link_type"];
 	$share_on_facebook_options["insertion_type"] = $_POST["insertion_type"];
-	
+
 	update_option('share_on_facebook_options', $share_on_facebook_options);
 	$options_saved = true;
 }
@@ -136,7 +158,7 @@ if (!get_option('share_on_facebook_options')){
 	// create default options
 	$share_on_facebook_options["link_type"] = 'link';
 	$share_on_facebook_options["insertion_type"] = 'auto';
-	
+
 	update_option('share_on_facebook_options', $share_on_facebook_options);
 }
 
