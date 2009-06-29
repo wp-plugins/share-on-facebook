@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: facebook
 Requires at least: 2.0
 Tested up to: 2.7.1
-Stable tag: 1.1
+Stable tag: 1.2
 
 This plugin adds a footer link to add the current post or page as a Facebook link.
 
