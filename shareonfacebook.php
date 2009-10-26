@@ -45,11 +45,9 @@ HTML;
 HTML;
 			break;
 		case "button":
-			$sharebuttoncode = <<< HTML
+			$data .= <<< HTML
 <a href="$url" id="facebook_share_button" style="$basestyle display: -moz-inline-block; display:inline-block; padding:1px 20px 0 5px; margin: 5px 0; height:15px; border:1px solid #d8dfea; color: #3B5998; background: #fff url(http://b.static.ak.fbcdn.net/images/share/facebook_share_icon.gif) no-repeat top right;">Share</a>
 HTML;
-$alldata=$sharebuttoncode.$data;
-$data=$alldata;
 			break;
 		}
 	$data .= <<< HTML
