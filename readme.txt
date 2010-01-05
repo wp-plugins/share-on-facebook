@@ -16,7 +16,7 @@ PHP 5.x is required.
 1. Add a directory called 'share-on-facebook' (without the quotes) to your '/wp-content/plugins/' directory.
 1. Upload shareonfacebook.php to '/wp-content/plugins/share-on-facebook/' directory.
 1. Activate the plugin through the 'Plugins' page in WordPress.
-1. Go to 'Options->Share on Facebook' in your admin interface to select your options.
+1. Go to 'Settings->Share on Facebook' in your admin interface to select your options.
 
 == Options ==
 There are two options on the options page: Link Type and Insertion Type.
