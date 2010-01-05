@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Share On Facebook
-Version: 1.2
+Version: 1.3
 Plugin URI: http://nothing.golddave.com/?page_id=680
 Description: Adds a footer link to add the current post or page to as a Facebook link.
 Author: David Goldstein
@@ -10,6 +10,9 @@ Author URI: http://nothing.golddave.com/
 
 /*
 Change Log
+
+1.3
+  * Facebook's "Post to Profile" page now appears in a popup for all posts on the index page of a blog.
 
 1.2
   * Reworked with valid XHTML.
@@ -31,29 +34,29 @@ function share_on_facebook($data = ''){
 	switch ($current_options['link_type']) {
 		case "link":
 			$data .= <<< HTML
-<a href="$url" id="facebook_share_link">Share on Facebook</a>
+<a href="$url" id="facebook_share_link_$post->ID">Share on Facebook</a>
 HTML;
 			break;
 		case "icon":
 			$data .= <<< HTML
-<a href="$url" id="facebook_share_icon" style="$basestyle"><img src="http://b.static.ak.fbcdn.net/images/share/facebook_share_icon.gif" alt="Share on Facebook" /></a>
+<a href="$url" id="facebook_share_icon_$post->ID" style="$basestyle"><img src="http://b.static.ak.fbcdn.net/images/share/facebook_share_icon.gif" alt="Share on Facebook" /></a>
 HTML;
 			break;
 		case "both":
 			$data .= <<< HTML
-<a href="$url" id="facebook_share_both" style="$basestyle padding:2px 0 0 20px; height:16px; background:url(http://b.static.ak.fbcdn.net/images/share/facebook_share_icon.gif) no-repeat top left;">Share on Facebook</a>
+<a href="$url" id="facebook_share_both_$post->ID" style="$basestyle padding:2px 0 0 20px; height:16px; background:url(http://b.static.ak.fbcdn.net/images/share/facebook_share_icon.gif) no-repeat top left;">Share on Facebook</a>
 HTML;
 			break;
 		case "button":
 			$data .= <<< HTML
-<a href="$url" id="facebook_share_button" style="$basestyle display: -moz-inline-block; display:inline-block; padding:1px 20px 0 5px; margin: 5px 0; height:15px; border:1px solid #d8dfea; color: #3B5998; background: #fff url(http://b.static.ak.fbcdn.net/images/share/facebook_share_icon.gif) no-repeat top right;">Share</a>
+<a href="$url" id="facebook_share_button_$post->ID" style="$basestyle display: -moz-inline-block; display:inline-block; padding:1px 20px 0 5px; margin: 5px 0; height:15px; border:1px solid #d8dfea; color: #3B5998; background: #fff url(http://b.static.ak.fbcdn.net/images/share/facebook_share_icon.gif) no-repeat top right;">Share</a>
 HTML;
 			break;
 		}
 	$data .= <<< HTML
 
 <script type="text/javascript">
-var button = document.getElementById('facebook_share_link') || document.getElementById('facebook_share_icon') || document.getElementById('facebook_share_both') || document.getElementById('facebook_share_button');
+var button = document.getElementById('facebook_share_link_$post->ID') || document.getElementById('facebook_share_icon_$post->ID') || document.getElementById('facebook_share_both_$post->ID') || document.getElementById('facebook_share_button_$post->ID');
 if (button) {
 	button.onclick = function(e) {
 		var url = this.href.replace(/share\.php/, 'sharer.php');
@@ -61,7 +64,7 @@ if (button) {
 		return false;
 	}
 
-	if (button.id === 'facebook_share_button') {
+	if (button.id === 'facebook_share_button_$post->ID') {
 		button.onmouseover = function(){
 			this.style.color='#fff';
 			this.style.borderColor = '#295582';
