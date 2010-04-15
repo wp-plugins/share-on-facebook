@@ -18,6 +18,7 @@ PHP 5.x is required.
 1. Activate the plugin through the 'Plugins' page in WordPress.
 1. Go to 'Settings->Share on Facebook' in your admin interface to select your options.
 
+
 == Options ==
 There are two options on the options page: Link Type and Insertion Type.
 
