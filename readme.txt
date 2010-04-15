@@ -3,8 +3,8 @@ Contributors: David Goldstein
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3396118
 Tags: facebook
 Requires at least: 2.0
-Tested up to: 2.9.1
-Stable tag: 1.3
+Tested up to: 2.9.2
+Stable tag: 1.4
 
 This plugin adds a footer link to add the current post or page as a Facebook link.
 
@@ -27,6 +27,8 @@ Insertion Type - This option sets how you want to insert the link into your post
 
 * Auto - When insertion type is set to auto the Facebook link will automatically be inserted right after the post.
 * Template - When insertion type is set to template the Facebook link will appear wherever the template tag for the plugin is added to your theme. This option requires a template tag to be added to your theme.
+
+Page Type - This option sets whether you want you Facebook link to appear on Posts, Pages or both (Posts and Pages).
 
 == Template Tag ==
 When Insertion Type is set to Template the following template tag must be added to your theme in the location you want the link to appear:
