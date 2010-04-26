@@ -1,4 +1,4 @@
-=== Plugin Name ===
+=== Share on Facebook ===
 Contributors: David Goldstein
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3396118
 Tags: facebook
