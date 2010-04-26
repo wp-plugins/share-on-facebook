@@ -22,6 +22,29 @@ Now compatible with PHP 4.x. PHP 5.x no longer required.
 1. Go to 'Settings->Share on Facebook' in your admin interface to select your options.
 
 
+== Changelog ==
+
+= 1.5 =
+* Added compatibility with PHP 4.x.
+
+= 1.4 =
+* Added option to choose to have the Facebook link appear on Posts, Pages or both (Posts and Pages).
+
+= 1.3 =
+* Facebook's "Post to Profile" page now appears in a popup for all posts on the index page of a blog.
+
+= 1.2 =
+* Reworked with valid XHTML.
+* Consolidated redundant code.
+* Updated styles for the button.
+
+= 1.1 =
+* Fixed bug in template tag implementation.
+
+= 1.0 =
+* First public release.
+
+
 == Options ==
 
 There are two options on the options page: Link Type and Insertion Type.
