@@ -9,7 +9,7 @@ Stable tag: 1.5
 This plugin adds a footer link to add the current post or page as a Facebook link.
 
 == Description ==
-This plugin adds a footer link to add the current post or page as a Facebook link.  While the plugin is activated a link will appear after the content of each post/page with the text "Share on Facebook", the Facebook icon, both or the familiar Facebook share button. Clicking the link will bring the user to the Facebook site to add the link to their profile.  If the user isn't logged in they will be prompted to do so.
+Adds a footer link to add the current post or page as a Facebook link.  While the plugin is activated a link will appear after the content of each post/page with the text "Share on Facebook", the Facebook icon, both or the familiar Facebook share button. Clicking the link will bring the user to the Facebook site to add the link to their profile.  If the user isn't logged in they will be prompted to do so.
 
 == Installation ==
 PHP 5.x is required.
