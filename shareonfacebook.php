@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Share On Facebook
-Version: 1.4
+Version: 1.5
 Plugin URI: http://nothing.golddave.com/?page_id=680
 Description: Adds a footer link to add the current post or page to as a Facebook link.
 Author: David Goldstein
@@ -10,6 +10,9 @@ Author URI: http://nothing.golddave.com/
 
 /*
 Change Log
+
+1.5
+  * Added compatibility with PHP 4.x.
 
 1.4
   * Added option to choose to have the Facebook link appear on Posts, Pages or both (Posts and Pages).
@@ -32,7 +35,8 @@ Change Log
 function share_on_facebook($data = ''){
 	global $post;
 	$current_options = get_option('share_on_facebook_options');
-	$url = 'http://www.facebook.com/share.php?u=' . rawurlencode(get_permalink($post->ID)) . '&amp;t=' . rawurlencode(get_post($post->ID)->post_title);
+	$p = get_post($post->ID);
+	$url = 'http://www.facebook.com/share.php?u=' . rawurlencode(get_permalink($post->ID)) . '&amp;t=' . rawurlencode($p->post_title);
 	$basestyle = "font-size:11px; line-height:13px; font-family:'lucida grande',tahoma,verdana,arial,sans-serif; text-decoration:none;";
 	
 	if (( ($current_options['page_type']=="posts") && (!is_page()) ) || ($current_options['page_type']=="pages") && (is_page()) || ($current_options['page_type']=="both")) {
