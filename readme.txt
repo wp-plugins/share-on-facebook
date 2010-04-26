@@ -6,6 +6,7 @@ Requires at least: 2.0
 Tested up to: 2.9.2
 Stable tag: 1.5
 
+
 This plugin adds a footer link to add the current post or page as a Facebook link.
 
 == Description ==
