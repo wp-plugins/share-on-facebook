@@ -13,6 +13,7 @@ This plugin adds a footer link to add the current post or page as a Facebook lin
 
 == Installation ==
 Now compatible with PHP 4.x. PHP 5.x no longer required.
+
 1. Add a directory called 'share-on-facebook' (without the quotes) to your '/wp-content/plugins/' directory.
 1. Upload shareonfacebook.php to '/wp-content/plugins/share-on-facebook/' directory.
 1. Activate the plugin through the 'Plugins' page in WordPress.
