@@ -43,7 +43,7 @@ function share_on_facebook($data = ''){
 		switch ($current_options['link_type']) {
 			case "link":
 				$data .= <<< HTML
-<a href="$url" id="facebook_share_link_$post->ID">Share on Facebook</a>this is a test
+<a href="$url" id="facebook_share_link_$post->ID">Share on Facebook</a>
 HTML;
 				break;
 			case "icon":
