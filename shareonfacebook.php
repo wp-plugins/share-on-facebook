@@ -65,6 +65,7 @@ HTML;
 		$data .= <<< HTML
 
 	<script type="text/javascript">
+	<!--
 	var button = document.getElementById('facebook_share_link_$post->ID') || document.getElementById('facebook_share_icon_$post->ID') || document.getElementById('facebook_share_both_$post->ID') || document.getElementById('facebook_share_button_$post->ID');
 	if (button) {
 		button.onclick = function(e) {
@@ -86,6 +87,7 @@ HTML;
 			}
 		}
 	}
+	-->
 	</script>
 	
 HTML;
