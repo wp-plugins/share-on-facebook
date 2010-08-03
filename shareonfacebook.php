@@ -11,6 +11,9 @@ Author URI: http://nothing.golddave.com/
 /*
 Change Log
 
+1.6
+  * Added comment tags around JavaScript to address errors.
+
 1.5
   * Added compatibility with PHP 4.x.
 
@@ -197,4 +200,94 @@ if (!get_option('share_on_facebook_options')){
 if ($_POST['action'] == 'save_share_on_facebook_options'){
 	share_on_facebook_save_options();
 }
+
+
+
+
+
+function shareonfacebook_widget(){
+	global $wp_query;
+	if(is_home()||is_front_page()||is_category() || is_archive() || is_tag() || is_month()) {
+		$thePostID = '0';
+		echo "This is the home page.";
+		$url = 'http://www.facebook.com/share.php?u=' . rawurlencode($_SERVER['HTTP_HOST']  . $_SERVER['REQUEST_URI']) . '&amp;t=' . bloginfo('name');
+	}
+	else{
+		$thePostID = $wp_query->post->ID;
+		$p = get_post($thePostID);
+		$url = 'http://www.facebook.com/share.php?u=' . rawurlencode(get_permalink($thePostID)) . '&amp;t=' . rawurlencode($p->post_title);
+	}
+//	$p = get_post($thePostID);
+//	$url = 'http://www.facebook.com/share.php?u=' . rawurlencode(get_permalink($thePostID)) . '&amp;t=' . rawurlencode($p->post_title);
+	$basestyle = "font-size:11px; line-height:13px; font-family:'lucida grande',tahoma,verdana,arial,sans-serif; text-decoration:none;";
+//	$current_options = get_option('share_on_facebook_options');
+	echo $thePostID.'<br><a href="'.$url.'" id="facebook_share_button_$thePostID" style="$basestyle display: -moz-inline-block; display:inline-block; padding:1px 20px 0 5px; margin: 5px 0; height:15px; border:1px solid #d8dfea; color: #3B5998; background: #fff url(http://b.static.ak.fbcdn.net/images/share/facebook_share_icon.gif) no-repeat top right;">Share</a>
+	<script type="text/javascript">
+	<!--
+	var button = document.getElementById(\'facebook_share_link_$thePostID\') || document.getElementById(\'facebook_share_icon_$thePostID\') || document.getElementById(\'facebook_share_both_$thePostID\') || document.getElementById(\'facebook_share_button_$thePostID\');
+	if (button) {
+		button.onclick = function(e) {
+			var url = this.href.replace(/share\.php/, \'sharer.php\');
+			window.open(url,\'sharer\',\'toolbar=0,status=0,width=626,height=436\');
+			return false;
+		}
+	
+		if (button.id === \'facebook_share_button_$thePostID\') {
+			button.onmouseover = function(){
+				this.style.color=\'#fff\';
+				this.style.borderColor = \'#295582\';
+				this.style.backgroundColor = \'#3b5998\';
+			}
+			button.onmouseout = function(){
+				this.style.color = \'#3b5998\';
+				this.style.borderColor = \'#d8dfea\';
+				this.style.backgroundColor = \'#fff\';
+			}
+		}
+	}
+	-->
+	</script>';
+	}
+
+function widget_share_on_facebook_register() {
+	function widget_share_on_facebook($args) {
+          extract($args);
+      ?>
+              <?php echo $before_widget; ?>
+                  <?php echo $before_title
+                      . 'Share on Facebook'
+                      . $after_title; 
+                  shareonfacebook_widget();
+              echo $after_widget; ?>
+      <?php
+      }
+      register_sidebar_widget('Share on Facebook', 'widget_share_on_facebook');}
+add_action('init', widget_share_on_facebook_register);
+
+
+
+
+//class share_on_facebook_widget extends WP_Widget {
+//	function share_on_facebook_widget() {
+//		parent::WP_Widget(false, $name = 'Share on facebook Widget');
+//	}
+
+//	function form($instance) {
+		// outputs the options form on admin
+//	}
+
+//	function update($new_instance, $old_instance) {
+		// processes widget options to be saved
+//	}
+
+//	function widget($args, $instance) {
+		// outputs the content of the widget
+//		shareonfacebook();
+//	}
+
+//}
+//register_widget('share_on_facebook_widget');
+
+//add_action('widgets_init', create_function('', 'return register_widget("share_on_facebook_widget");'));
+
 ?>
