@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Share On Facebook
-Version: 1.5
+Version: 1.6
 Plugin URI: http://nothing.golddave.com/?page_id=680
 Description: Adds a footer link to add the current post or page to as a Facebook link.
 Author: David Goldstein
@@ -263,31 +263,5 @@ function widget_share_on_facebook_register() {
       }
       register_sidebar_widget('Share on Facebook', 'widget_share_on_facebook');}
 add_action('init', widget_share_on_facebook_register);
-
-
-
-
-//class share_on_facebook_widget extends WP_Widget {
-//	function share_on_facebook_widget() {
-//		parent::WP_Widget(false, $name = 'Share on facebook Widget');
-//	}
-
-//	function form($instance) {
-		// outputs the options form on admin
-//	}
-
-//	function update($new_instance, $old_instance) {
-		// processes widget options to be saved
-//	}
-
-//	function widget($args, $instance) {
-		// outputs the content of the widget
-//		shareonfacebook();
-//	}
-
-//}
-//register_widget('share_on_facebook_widget');
-
-//add_action('widgets_init', create_function('', 'return register_widget("share_on_facebook_widget");'));
 
 ?>
