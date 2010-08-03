@@ -20,6 +20,9 @@ PHP 5.x is required.
 1. Go to 'Settings->Share on Facebook' in your admin interface to select your options.
 
 == Changelog ==
+= 1.6 =
+* Added comment tags around JavaScript to address errors.
+
 = 1.5 =
 * Added compatibility with PHP 4.x.
 
