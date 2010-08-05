@@ -13,6 +13,7 @@ Change Log
 
 1.6
   * Added comment tags around JavaScript to address errors.
+  * Changed a $_SERVER['PHP_SELF'] call to $_SERVER['REQUEST_URI'] to address possible security issue.
 
 1.5
   * Added compatibility with PHP 4.x.
@@ -132,7 +133,7 @@ function share_on_facebook_options_page() {
 	<div class="wrap" id="share-on-facebook-options">
 		<h2>Share on Facebook Options</h2>
 
-		<form method="post" action="<?php echo $_SERVER['PHP_SELF']."?".$_SERVER['QUERY_STRING']; ?>">
+		<form method="post" action="<?php echo $_SERVER['REQUEST_URI']."?".$_SERVER['QUERY_STRING']; ?>">
 			<fieldset>
 				<legend>Options:</legend>
 				<input type="hidden" name="action" value="save_share_on_facebook_options" />
