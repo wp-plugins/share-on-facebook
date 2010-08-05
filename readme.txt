@@ -3,8 +3,8 @@ Contributors: David Goldstein
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3396118
 Tags: facebook
 Requires at least: 2.0
-Tested up to: 2.9.2
-Stable tag: 1.5
+Tested up to: 3.0.1
+Stable tag: 1.6
 
 This plugin adds a footer link to add the current post or page as a Facebook link.
 
@@ -22,6 +22,7 @@ PHP 5.x is required.
 == Changelog ==
 = 1.6 =
 * Added comment tags around JavaScript to address errors.
+* Changed a $_SERVER['PHP_SELF'] call to $_SERVER['REQUEST_URI'] to address possible security issue.
 
 = 1.5 =
 * Added compatibility with PHP 4.x.
