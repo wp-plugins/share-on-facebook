@@ -12,8 +12,6 @@ This plugin adds a footer link to add the current post or page as a Facebook lin
 This plugin adds a footer link to add the current post or page as a Facebook link.  While the plugin is activated a link will appear after the content of each post/page with the text "Share on Facebook", the Facebook icon, both or the familiar Facebook share button. Clicking the link will bring the user to the Facebook site to add the link to their profile.  If the user isn't logged in they will be prompted to do so.
 
 == Installation ==
-PHP 5.x is required.
-
 1. Add a directory called 'share-on-facebook' (without the quotes) to your '/wp-content/plugins/' directory.
 1. Upload shareonfacebook.php to '/wp-content/plugins/share-on-facebook/' directory.
 1. Activate the plugin through the 'Plugins' page in WordPress.
@@ -48,7 +46,7 @@ PHP 5.x is required.
 * First public release.
 
 == Options ==
-There are two options on the options page: Link Type and Insertion Type.
+There are three options on the options page: Link Type, Insertion Type and Page Type.
 
 Link Type - This option sets if you want your Facebook link to be text, icon, both or share button.
 
